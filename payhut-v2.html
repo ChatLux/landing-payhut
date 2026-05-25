@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayHut.ai — Premium Fintech Domain For Sale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:           #080b10;
+  --surface:      #0d1117;
+  --surface2:     #111722;
+  --border:       rgba(255,255,255,0.06);
+  --accent:       #00d4a1;
+  --accent-bright:#00ffca;
+  --accent-dim:   rgba(0,212,161,0.08);
+  --gold:         #c9a84c;
+  --gold-dim:     rgba(201,168,76,0.1);
+  --text:         #e8edf5;
+  --muted:        rgba(232,237,245,0.48);
+  --void:         #050709;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-weight: 300;
+  font-size: 17px; /* BASE: was ~13-14px, bumped +4pt */
+  line-height: 1.8; overflow-x: hidden; cursor: none;
+}
+/* ── CURSOR ── */
+#cursor-dot {
+  width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+}
+#cursor-ring {
+  width: 32px; height: 32px; border: 1.5px solid var(--accent); border-radius: 50%;
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%); opacity: 0.5;
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+}
+/* ── NOISE ── */
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1; opacity: 0.4;
+}
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 24px 60px; display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(8,11,16,0.95), transparent);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); }
+.nav-logo span { color: var(--accent); }
+.nav-tag { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.nav-cta {
+  font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); text-decoration: none; border: 1px solid rgba(0,212,161,0.3); padding: 11px 26px;
+  transition: all 0.3s; cursor: none;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.nav-cta:hover { background: var(--accent-dim); border-color: var(--accent); color: var(--accent-bright); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 140px 60px 80px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,212,161,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,161,0.03) 1px, transparent 1px);
+  background-size: 80px 80px; pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%);
+  width: 1000px; height: 1000px;
+  background: radial-gradient(ellipse, rgba(0,212,161,0.07) 0%, transparent 70%); pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 12px; margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--accent); }
+
+/* DOMAIN NAME as the giant headline ── */
+.hero-domain-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 16vw, 220px);
+  line-height: 0.88;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+  position: relative; z-index: 2;
+  opacity: 0; animation: fadeUp 0.9s 0.3s forwards;
+}
+.hero-domain-name .pay { color: var(--text); }
+.hero-domain-name .hut { -webkit-text-stroke: 2px var(--accent); color: transparent; }
+.hero-domain-name .ext { color: var(--accent); font-size: 0.55em; vertical-align: top; margin-top: 0.12em; display: inline-block; }
+
+.hero-tagline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 36px;
+  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+  position: relative; z-index: 2;
+  text-transform: uppercase;
+}
+.hero-tagline span { color: var(--text); }
+
+.hero-sub {
+  font-size: 18px; line-height: 1.78; color: var(--muted); max-width: 560px; margin-bottom: 48px;
+  opacity: 0; animation: fadeUp 0.9s 0.65s forwards; position: relative; z-index: 2;
+}
+.hero-cta-row {
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.9s 0.8s forwards; position: relative; z-index: 2;
+}
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bg); background: var(--accent); padding: 19px 42px;
+  text-decoration: none; position: relative; overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  transition: color 0.3s; cursor: none; border: none;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0; background: var(--accent-bright);
+  transform: translateX(-100%); transition: transform 0.35s ease;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover .btn-arrow { transform: translateX(5px); }
+.btn-primary span, .btn-primary .btn-arrow { position: relative; z-index: 1; }
+.btn-arrow { transition: transform 0.3s; display: inline-block; }
+
+.btn-ghost {
+  font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.3s;
+}
+.btn-ghost:hover { color: var(--text); }
+
+.hero-stat-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border); margin-top: 72px; padding-top: 40px;
+  opacity: 0; animation: fadeUp 0.9s 1.0s forwards; position: relative; z-index: 2; max-width: 640px;
+}
+.stat-item { padding-right: 32px; }
+.stat-item:not(:last-child) { border-right: 1px solid var(--border); margin-right: 32px; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 46px; line-height: 1; color: var(--accent); }
+.stat-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+
+/* ── SECTION BASE ── */
+.section-label {
+  font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.26em;
+  text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.section-label::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+section { padding: 100px 60px; position: relative; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(46px, 6.5vw, 86px); line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 24px; }
+
+/* ── WHY SECTION ── */
+.why-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); margin-top: 60px; border: 1px solid var(--border); }
+.why-card { background: var(--surface); padding: 40px 32px; position: relative; overflow: hidden; transition: background 0.3s; }
+.why-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+.why-card:hover::after { transform: scaleX(1); }
+.why-card:hover { background: var(--surface2); }
+.why-num { font-family: 'Bebas Neue', sans-serif; font-size: 58px; line-height: 1; color: var(--accent-dim); margin-bottom: 16px; -webkit-text-stroke: 1px rgba(0,212,161,0.2); }
+.why-card-title { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 18px; margin-bottom: 12px; color: var(--text); }
+.why-card p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+
+/* ── COMPS TABLE ── */
+.comps-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 60px; }
+.comps-intro p { font-size: 17px; color: var(--muted); line-height: 1.8; }
+.comps-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); }
+.comps-table th { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); padding: 16px 24px; text-align: left; border-bottom: 1px solid var(--border); background: var(--surface); }
+.comps-table td { padding: 18px 24px; font-size: 15px; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: middle; }
+.comps-table tr:last-child td { border-bottom: none; }
+.comps-table tr:hover td { background: var(--accent-dim); }
+.domain-name { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--text); font-weight: 700; }
+.sale-price { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--accent); letter-spacing: 0.03em; }
+.badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(201,168,76,0.4); color: var(--gold); background: var(--gold-dim); border-radius: 2px; }
+.badge.fintech { border-color: rgba(0,212,161,0.3); color: var(--accent); background: var(--accent-dim); }
+.badge.payment { border-color: rgba(0,212,161,0.4); color: var(--accent-bright); background: var(--accent-dim); }
+.payhut-row td { background: rgba(0,212,161,0.05) !important; border-top: 1px solid rgba(0,212,161,0.25); border-bottom: 1px solid rgba(0,212,161,0.25); }
+.payhut-row .domain-name { color: var(--accent-bright); font-size: 16px; }
+.payhut-row .sale-price { font-size: 28px; color: var(--gold); }
+.you-are-here { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; display: block; margin-top: 4px; }
+
+/* ── MARKET SECTION ── */
+.market-section { background: var(--void); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.market-text p { font-size: 17px; color: var(--muted); line-height: 1.85; margin-bottom: 24px; }
+.market-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.market-card { background: var(--surface); border: 1px solid var(--border); padding: 28px 24px; position: relative; }
+.market-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent); }
+.market-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+.market-card-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+/* ── WHO SECTION ── */
+.who-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; margin-top: 60px; }
+.who-intro p { font-size: 17px; color: var(--muted); line-height: 1.85; }
+.who-pills { display: flex; flex-wrap: wrap; gap: 12px; }
+.who-pill { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--border); color: var(--muted); transition: all 0.3s; cursor: default; }
+.who-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+/* ── VALUE SECTION ── */
+.value-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+.value-item { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--border); transition: padding-left 0.3s; }
+.value-item:hover { padding-left: 12px; }
+.value-icon { width: 44px; height: 44px; flex-shrink: 0; background: var(--accent-dim); border: 1px solid rgba(0,212,161,0.2); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-top: 4px; }
+.value-title { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 17px; margin-bottom: 8px; }
+.value-desc { font-size: 15px; color: var(--muted); line-height: 1.75; }
+.value-price-card { background: var(--bg); border: 1px solid var(--border); padding: 52px; text-align: center; position: relative; }
+.value-price-card::before { content: 'ASKING PRICE'; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.3em; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg); padding: 5px 18px; }
+.price-domain { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 8px; }
+.price-tag { font-family: 'Bebas Neue', sans-serif; font-size: 82px; line-height: 1; color: var(--text); margin-bottom: 12px; }
+.price-note { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 32px; }
+.escrow-note { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; padding-top: 24px; border-top: 1px solid var(--border); }
+.escrow-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+/* ── FINAL CTA ── */
+.cta-section { text-align: center; padding: 120px 60px; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 700px; background: radial-gradient(ellipse, rgba(0,212,161,0.09) 0%, transparent 70%); pointer-events: none; }
+.cta-section .section-title { font-size: clamp(52px, 7.5vw, 96px); margin-bottom: 24px; }
+.cta-section .section-title span { color: var(--accent); }
+.cta-sub { font-size: 18px; color: var(--muted); max-width: 500px; margin: 0 auto 48px; line-height: 1.78; }
+.cta-trust { margin-top: 28px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+
+/* ── MARQUEE ── */
+.marquee-wrap { background: var(--accent); padding: 15px 0; overflow: hidden; position: relative; z-index: 10; }
+.marquee-track { display: flex; white-space: nowrap; animation: marquee 24s linear infinite; }
+.marquee-item { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.08em; color: var(--bg); padding: 0 32px; }
+.marquee-dot { color: rgba(8,11,16,0.5); padding: 0 4px; font-size: 18px; }
+
+/* ── FOOTER ── */
+footer { padding: 32px 60px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--muted); }
+.footer-logo span { color: var(--accent); }
+.footer-copy { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.85s ease, transform 0.85s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; } .nav-tag { display: none; }
+  section { padding: 72px 24px; } .hero { padding: 120px 24px 64px; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .comps-intro { grid-template-columns: 1fr; gap: 28px; }
+  .market-grid { grid-template-columns: 1fr; gap: 48px; }
+  .who-layout { grid-template-columns: 1fr; gap: 40px; }
+  .value-grid { grid-template-columns: 1fr; gap: 48px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .market-cards { grid-template-columns: 1fr; }
+  .hero-stat-row { grid-template-columns: 1fr; }
+  .stat-item:not(:last-child) { border-right: none; margin-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 20px; }
+  body { cursor: auto; } #cursor-dot, #cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pay<span>Hut</span>.ai</div>
+  <div class="nav-tag">// Premium Domain Investment</div>
+  <a href="https://paymegpt.com/agents/73183905/domainiac" target="_blank" class="nav-cta">Make an Offer <span class="btn-arrow">→</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Premium .ai Domain · Fintech Category · 6-Letter Asset</div>
+
+  <!-- DOMAIN NAME as the giant centrepiece headline -->
+  <div class="hero-domain-name">
+    <span class="pay">PAY</span><span class="hut">HUT</span><span class="ext">.AI</span>
+  </div>
+
+  <div class="hero-tagline">The Domain <span>Fintech</span> Needs.</div>
+
+  <p class="hero-sub">A brandable, six-letter .ai domain sitting at the convergence of AI-powered payments, agentic fintech, and the next generation of financial infrastructure. Short. Memorable. Category-defining.</p>
+
+  <div class="hero-cta-row">
+    <a href="https://paymegpt.com/agents/73183905/domainiac" target="_blank" class="btn-primary">
+      <span>Inquire Now</span><span class="btn-arrow">→</span>
+    </a>
+    <a href="#comparables" class="btn-ghost">View Comparable Sales ↓</a>
+  </div>
+
+  <div class="hero-stat-row">
+    <div class="stat-item"><div class="stat-num">$22M+</div><div class="stat-label">.ai sales volume 2025</div></div>
+    <div class="stat-item"><div class="stat-num">551K</div><div class="stat-label">.ai domains registered</div></div>
+    <div class="stat-item"><div class="stat-num">+91%</div><div class="stat-label">YoY .ai market growth</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">PayHut.ai</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">6-Letter Premium</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Fintech Ready</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">AI Payments</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Category Asset</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Afternic · Escrow.com</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Make an Offer</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">PayHut.ai</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">6-Letter Premium</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Fintech Ready</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">AI Payments</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Category Asset</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Afternic · Escrow.com</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Make an Offer</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- WHY PAYHUT -->
+<section class="why-section">
+  <div class="section-label reveal">Why PayHut.ai</div>
+  <h2 class="section-title reveal">Built For The<br><span style="color:var(--accent)">AI Payment Era</span></h2>
+  <div class="why-grid">
+    <div class="why-card reveal"><div class="why-num">01</div><div class="why-card-title">Instant Brand Clarity</div><p>"Pay" + "Hut" creates an immediately understood concept — a hub for payments. No explanation required. Three syllables. Global appeal across every market.</p></div>
+    <div class="why-card reveal"><div class="why-num">02</div><div class="why-card-title">Fintech-Native .ai Signal</div><p>The .ai extension signals AI-native infrastructure. AI-powered payments is the fastest-growing fintech vertical in 2025, attracting billions in venture capital globally.</p></div>
+    <div class="why-card reveal"><div class="why-num">03</div><div class="why-card-title">Agentic Commerce Ready</div><p>AI agents conducting autonomous payments is the next frontier. PayHut.ai positions perfectly as the platform enabling agent-to-agent financial transactions.</p></div>
+    <div class="why-card reveal"><div class="why-num">04</div><div class="why-card-title">Premium 6-Letter Scarcity</div><p>Short, pronounceable, brandable .ai domains are increasingly rare. Premium 6-letter fintech-relevant .ai names are almost entirely registered or held by investors.</p></div>
+  </div>
+</section>
+
+<!-- COMPARABLE SALES — 5 & 6 LETTER .AI ONLY -->
+<section id="comparables">
+  <div class="section-label reveal">Market Research</div>
+  <h2 class="section-title reveal">Comparable 5–6 Letter<br>.ai Domain Sales</h2>
+  <div class="comps-intro reveal">
+    <p>The .ai aftermarket produced over $22 million in reported sales in 2025 alone — a 91% increase year-over-year. The table below shows only publicly verified 5- and 6-letter .ai domain sales, the closest comparables to PayHut.ai.</p>
+    <p>PayHut.ai's fintech-keyword positioning — the "Pay" prefix alone is worth a significant premium — places it squarely in the upper range of 6-letter .ai aftermarket values.</p>
+  </div>
+  <div class="reveal">
+    <table class="comps-table">
+      <thead>
+        <tr><th>Domain</th><th>Sale Price</th><th>Date</th><th>Letters</th><th>Category</th><th>Venue</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="domain-name">Stack.ai</span></td>
+          <td><span class="sale-price">$258,888</span></td>
+          <td>Apr 2023</td>
+          <td>5-letter</td>
+          <td><span class="badge">Tech / SaaS</span></td>
+          <td>NameBio</td>
+        </tr>
+        <tr>
+          <td><span class="domain-name">Speed.ai</span></td>
+          <td><span class="sale-price">$165,000</span></td>
+          <td>Aug 2025</td>
+          <td>5-letter</td>
+          <td><span class="badge payment">Payments</span></td>
+          <td>NameBio</td>
+        </tr>
+        <tr>
+          <td><span class="domain-name">Turbo.ai</span></td>
+          <td><span class="sale-price">$165,000</span></td>
+          <td>Mar 2025</td>
+          <td>5-letter</td>
+          <td><span class="badge">Tech</span></td>
+          <td>Atom</td>
+        </tr>
+        <tr>
+          <td><span class="domain-name">Demand.ai</span></td>
+          <td><span class="sale-price">$118,000</span></td>
+          <td>Aug 2025</td>
+          <td>6-letter</td>
+          <td><span class="badge">Commerce</span></td>
+          <td>NameBio</td>
+        </tr>
+        <tr>
+          <td><span class="domain-name">Pioneer.ai</span></td>
+          <td><span class="sale-price">$111,000</span></td>
+          <td>Aug 2025</td>
+          <td>7-letter</td>
+          <td><span class="badge">Brand</span></td>
+          <td>NameBio</td>
+        </tr>
+        <tr class="payhut-row">
+          <td>
+            <span class="domain-name">PayHut.ai</span>
+            <span class="you-are-here">★ This Domain · For Sale Now</span>
+          </td>
+          <td><span class="sale-price">Make Offer</span></td>
+          <td>Available Now</td>
+          <td>6-letter</td>
+          <td><span class="badge fintech">AI Fintech</span></td>
+          <td>Afternic / Escrow</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="reveal" style="margin-top:18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;">
+    Sources: Cognitive.ai, NameBio, Sedo, Atom · All sales publicly reported
+  </p>
+</section>
+
+<!-- MARKET OPPORTUNITY -->
+<section class="market-section">
+  <div class="market-grid">
+    <div class="market-text reveal">
+      <div class="section-label">Market Context</div>
+      <h2 class="section-title">The Fintech<br>AI Wave Is<br><span style="color:var(--accent)">Now</span></h2>
+      <p>AI-related fintech M&amp;A deals nearly doubled as a share of total deal activity between 2024 and mid-2025. Companies like Stripe, Revolut, and a new generation of agentic payment platforms are racing to establish AI-native brand identities.</p>
+      <p>PayHut.ai places any acquirer at the epicenter of AI payments, autonomous billing, and next-generation commerce infrastructure — working for a startup, an enterprise rebrand, or a domain investor holding for appreciation.</p>
+    </div>
+    <div class="market-cards reveal">
+      <div class="market-card"><div class="market-card-num">300%</div><div class="market-card-label">.ai domain registration growth in 2024</div></div>
+      <div class="market-card"><div class="market-card-num">$22M+</div><div class="market-card-label">Reported .ai aftermarket sales in 2025</div></div>
+      <div class="market-card"><div class="market-card-num">9%</div><div class="market-card-label">Fintech M&amp;A deals with AI focus, 2025</div></div>
+      <div class="market-card"><div class="market-card-num">+91%</div><div class="market-card-label">Year-over-year .ai sales volume growth</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO SHOULD OWN THIS -->
+<section class="who-section">
+  <div class="section-label reveal">Ideal Acquirers</div>
+  <h2 class="section-title reveal">Who Should<br>Own PayHut.ai</h2>
+  <div class="who-layout">
+    <div class="who-intro reveal">
+      <p>PayHut.ai is a category-defining asset for any company building at the intersection of AI and financial services. The name is short, globally pronounceable, and brand-ready from day one.</p>
+    </div>
+    <div>
+      <div class="who-pills reveal">
+        <div class="who-pill">AI Payment Startups</div>
+        <div class="who-pill">Neobanks &amp; Challenger Banks</div>
+        <div class="who-pill">Fintech Rebrands</div>
+        <div class="who-pill">Crypto / Stablecoin Platforms</div>
+        <div class="who-pill">Agentic Commerce Infrastructure</div>
+        <div class="who-pill">Buy Now Pay Later (BNPL)</div>
+        <div class="who-pill">Digital Wallet Providers</div>
+        <div class="who-pill">B2B Payment APIs</div>
+        <div class="who-pill">Domain Investors</div>
+        <div class="who-pill">AI Agent Payment Networks</div>
+        <div class="who-pill">POS &amp; Merchant Platforms</div>
+        <div class="who-pill">Remittance &amp; Cross-Border</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE & PRICE -->
+<section class="value-section">
+  <div class="section-label reveal">Investment Details</div>
+  <h2 class="section-title reveal">What You're<br>Acquiring</h2>
+  <div class="value-grid">
+    <div class="value-list">
+      <div class="value-item reveal">
+        <div class="value-icon">🔐</div>
+        <div>
+          <div class="value-title">Full Domain Ownership</div>
+          <div class="value-desc">Complete transfer of PayHut.ai with all rights. Clean registration history. Expires in 2028. Transferable via Afternic or Escrow.com.</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-icon">⚡</div>
+        <div>
+          <div class="value-title">Instant Brand-Ready Asset</div>
+          <div class="value-desc">No trademark conflicts. Six letters. Two words. One clear message. Deploy as your primary domain or hold as a portfolio asset.</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-icon">📈</div>
+        <div>
+          <div class="value-title">Appreciating Category</div>
+          <div class="value-desc">The .ai aftermarket grew 91% in 2025 and shows no signs of slowing. Fintech-keyword .ai domains are among the fastest appreciating in the space.</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-icon">🤝</div>
+        <div>
+          <div class="value-title">Secure Transaction</div>
+          <div class="value-desc">Afternic or Escrow.com-facilitated transfer. Flexible on lease-to-own structures for qualified buyers. All serious offers reviewed.</div>
+        </div>
+      </div>
+    </div>
+    <div class="value-price-card reveal">
+      <div class="price-domain">PayHut.ai</div>
+      <div class="price-tag">Make<br>An Offer</div>
+      <div class="price-note">Priced for serious fintech acquirers · All offers considered</div>
+      <a href="https://paymegpt.com/agents/73183905/domainiac" target="_blank" class="btn-primary" style="width:100%;justify-content:center;display:flex;">
+        <span>Submit Your Offer</span><span class="btn-arrow">→</span>
+      </a>
+      <div class="escrow-note" style="margin-top:24px;"><span class="escrow-dot"></span>Afternic · Escrow.com Transfer Available</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="contact-cta" class="cta-section">
+  <div class="section-label reveal" style="justify-content:center;">Get In Touch</div>
+  <h2 class="section-title reveal">Ready To Own<br><span>PayHut.ai?</span></h2>
+  <p class="cta-sub reveal">Chat with Domainiac — our AI domain concierge — to submit your offer, ask questions, or request a call. All serious inquiries considered.</p>
+  <a href="https://paymegpt.com/agents/73183905/domainiac" target="_blank" class="btn-primary reveal" style="display:inline-flex;">
+    <span>Start a Conversation</span><span class="btn-arrow">→</span>
+  </a>
+  <div class="cta-trust reveal">Secure Transaction · Afternic · Escrow.com Protected · Fast Transfer</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pay<span>Hut</span>.ai</div>
+  <div class="footer-copy">© 2026 PayHut.ai · All Rights Reserved · Premium Domain Asset</div>
+</footer>
+
+<!-- DOMAINIAC CHATBOT WIDGET (floating bottom-right) -->
+<script src="https://paymegpt.com/widget.js" data-widget="73183905" async></script>
+
+<script>
+// Custom cursor
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let ringX = 0, ringY = 0;
+document.addEventListener('mousemove', e => {
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+});
+(function animateRing() {
+  ringX += ((parseFloat(dot.style.left)||0) - ringX) * 0.15;
+  ringY += ((parseFloat(dot.style.top)||0) - ringY) * 0.15;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+})();
+
+// Marquee duplicate
+const track = document.getElementById('marqueeTrack');
+track.innerHTML += track.innerHTML;
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
